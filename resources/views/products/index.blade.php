@@ -3,11 +3,14 @@
 @section('title', 'Criar Produto')
 
 @section('content')
-    
+
     <div class="mb-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-product">
+        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-product">
             Novo Produto
-        </button>
+        </button> --}}
+        <a href="{{ route('product.create') }}" class="btn btn-primary">
+            Novo Produto
+        </a>
         <table class="table table-striped" id="productTable">
             <thead>
                 <tr>
@@ -18,14 +21,17 @@
             </thead>
             <tbody>
                 @foreach ($products as $product)
-                <tr>
-                    <td>{{ $product->id }}</td>
-                    <td>{{ $product->name }}</td>
-                    <td>
-                        <a class="btn btn-primary" href="{{ route('product.edit', [$product->id]) }}"><i class="material-icons">edit</i></i></a>
-                        <a class="btn btn-danger" href="{{ route('product.destroy', [$product->id]) }}" onclick="return confirm('Deseja realmente excluir?')"><i class="material-icons">delete</i></i></a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{{ route('product.edit', [$product->id]) }}"><i
+                                    class="material-icons">edit</i></i></a>
+                            <a class="btn btn-danger" href="{{ route('product.destroy', [$product->id]) }}"
+                                onclick="return confirm('Deseja realmente excluir?')"><i
+                                    class="material-icons">delete</i></i></a>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -59,6 +65,7 @@
         $(document).on('submit', '#form-create-product', function(e) {
             e.preventDefault();
             let name = $('#productName').val();
+            console.log(name);
             let _token = $("input[name=_token]").val();
             console.log(name);
             $.ajax({
@@ -70,15 +77,14 @@
                 },
                 success: function(response) {
                     if (response) {
-                        $("#productTable tbody").prepend('<tr><td>' + response.id + '</td><td>' +
-                            response.name + '</td><td><td>');
                         $("#form-create-product")[0].reset();
                         $('#create-product').modal('hide');
 
                         Swal.fire(
                             'Produto cadastrado com sucesso!',
                             'success'
-                        )
+                        ),
+                        window.location.reload();
                     }
                 },
                 error: function(data) {
@@ -93,5 +99,5 @@
             });
         });
     </script>
-    
+
 @endsection

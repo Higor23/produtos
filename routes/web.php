@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Create product
-// Route::get('product/create/', 'ProductController@create')->name('product.create');
+// // Create product
+Route::get('product/create/', 'ProductController@create')->name('product.create');
 Route::get('products', 'ProductController@index')->name('product.index');
 Route::post('product/store', 'ProductController@store')->name('product.store');
 Route::put('product/{id}/edit', 'ProductController@edit')->name('product.edit');
 Route::get('product/{id}/destroy', 'ProductController@destroy')->name('product.destroy');
+Auth::routes();
+
+// Route::resource('products', ProductController::class);
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

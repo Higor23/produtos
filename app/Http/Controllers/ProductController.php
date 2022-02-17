@@ -35,8 +35,9 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $tags = $this->tag->all();
 
-        return view('products.create');
+        return view('products.create', ['tags' => $tags]);
     }
 
     /**
@@ -47,9 +48,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // echo '<pre>'; print_r($request); echo '</pre>'; exit;
         $product = new Product();
         $product->name = $request->name;
+        $product->cost = $request->cost;
+        $product->sale = $request->sale;
         $product->save();
+
+        foreach($_POST['tags'] as $tag){
+            $product->tags()->save(Tag::find($tag));
+
+        }
+        // $product->tags()->saveMany([
+        //     Tag::find($request->tagId)
+        // ]);
+
         return response()->json($product);
     }
 
