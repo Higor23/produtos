@@ -69,3 +69,17 @@ Fazer o login com os seguintes dados:
 Email: admin@teste
 
 Senha: 12345678
+
+
+Relatório SQL:
+
+```sh
+-- Listagem de tags e produtos relacionados
+SELECT a.id as id_produto, a.name as nome_produto, c.name as nome_tag FROM products a INNER JOIN product_tag b ON a.id=b.product_id INNER JOIN tags c ON c.id=b.tag_id;
+
+-- Todos os produtos que possuem uma tag específica, como por exemplo 10% off.
+SELECT a.id as id_produto, a.name as nome_produto, c.name as nome_tag FROM products a INNER JOIN product_tag b ON a.id=b.product_id INNER JOIN tags c ON c.id=b.tag_id WHERE c.name='10% off' GROUP BY a.id;
+
+-- Todos os produtos que não possuem uma tag específica, como por exemplo 15% off.
+SELECT a.id as id_produto, a.name as nome_produto, c.name as nome_tag FROM products a INNER JOIN product_tag b ON a.id=b.product_id INNER JOIN tags c ON c.id=b.tag_id WHERE c.name NOT IN('15% off');
+```
