@@ -51,7 +51,6 @@
                         title: 'Erro',
                         text: 'Não foi possível cadastrar a tag!',
                     }),
-                    window.location.href = {{ route('tag.index') }};
                 }
             });
         });
