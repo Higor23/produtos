@@ -5,17 +5,23 @@
 @section('content')
 
     <div class="mb-3">
-        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-product">
-            Novo Produto
-        </button> --}}
-        <a href="{{ route('product.create') }}" class="btn btn-primary">
+        <a href="{{ route('product.create') }}" class="btn btn-primary btn-new">
             Novo Produto
         </a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <form action="{{ route('product.search') }}" method="POST" class="form-inline my-0 my-lg-0">
+                @csrf
+                <input class="form-control mr-sm-2" name="filter" type="Buscar" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 btn-radius" type="submit">Buscar</button>
+            </form>
+        </nav>
         <table class="table table-striped" id="productTable">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nome do produto</th>
+                    <th scope="col">Preço de custo (R$)</th>
+                    <th scope="col">Preço de venda (R$)</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -24,6 +30,8 @@
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
+                        <td>{{ number_format($product->cost, 2 , ',', '') }}</td>
+                        <td>{{ number_format($product->sale, 2 , ',', '') }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('product.edit', [$product->id]) }}"><i
                                     class="material-icons">edit</i></i></a>

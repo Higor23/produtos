@@ -8,3 +8,15 @@ h3 {
 .div-input{
   padding: 15px;
 }
+
+.btn-back{
+  margin: 20px 0px 20px 0px;
+}
+
+.btn-new {
+  margin: 20px 0px 20px 0px;
+}
+
+#productTable{
+  text-align: center;
+}

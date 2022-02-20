@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -36,7 +37,6 @@ class ProductController extends Controller
     public function create()
     {
         $tags = $this->tag->all();
-
         return view('products.create', ['tags' => $tags]);
     }
 
@@ -48,7 +48,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // echo '<pre>'; print_r($request); echo '</pre>'; exit;
         $product = new Product();
         $product->name = $request->name;
         $product->cost = $request->cost;
@@ -59,10 +58,6 @@ class ProductController extends Controller
             $product->tags()->save(Tag::find($tag));
 
         }
-        // $product->tags()->saveMany([
-        //     Tag::find($request->tagId)
-        // ]);
-
         return response()->json($product);
     }
 
@@ -73,8 +68,22 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        $product = $this->product->find($id);
+        $tags = $this->tag->all();
 
+        $productsTags = DB::table('product_tag')->where('product_id','=',$id)->get();
+
+        $productsTagsResult = null;
+        foreach($productsTags as $key => $productTag){
+            $productsTagsResult[] = $productTag->tag_id;
+        }
+
+        return view('products.edit', [
+            'tags'    => $tags,
+            'product' => $product,
+            'productsTagsResult' => $productsTagsResult
+        ]);
     }
 
     /**
@@ -86,7 +95,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = $this->product->find($id);
+
+        $data = $request->all();
+        $product->update($data);
+
+        foreach($_POST['tags'] as $tag){
+            $product->tags()->save(Tag::find($tag));
+
+        }
+        return response()->json($product);
+
     }
 
     /**
@@ -101,5 +120,17 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $products = $this->product->search($request->filter);
+
+        return view('products.index', ['products' => $products]);
     }
 }

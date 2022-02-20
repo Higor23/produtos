@@ -13,6 +13,18 @@ class Tag extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_tag');
+    }
+
+    public function search($filter = null)
+    {
+        $results = $this->where(function ($query) use ($filter) {
+            if ($filter) {
+                $query->where('name', 'LIKE', "%{$filter}%");
+            }
+        })
+            ->paginate();
+
+        return $results;
     }
 }
