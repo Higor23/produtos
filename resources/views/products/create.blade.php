@@ -55,7 +55,6 @@
                     if (response) {
                         Swal.fire(
                                 'Produto cadastrado com sucesso!',
-                                'success'
                             )
                             
                     }
