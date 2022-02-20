@@ -52,8 +52,7 @@ Gerar a key do projeto Laravel
 ```sh
 php artisan key:generate
 ```
-Acesse o PhpmyAdmin informando o mesmo usuário(root) e senha(root) utilizado no arquivo .env:
-[http://localhost:8180](http://localhost:8180)
+Acessar o PhpmyAdmin em [http://localhost:8081](http://localhost:8081) informando o mesmo usuário(root) e senha(root) utilizado no arquivo .env.
 
 Criar um banco de dados com o mesmo nome(products) utilizado no arquivo .env.
 
@@ -62,5 +61,9 @@ Criar e preencher as tabelas no banco de dados
 php artisan migrate --seed
 ```
 
-Acesse o projeto
+Acessar o projeto
 [http://localhost:8180](http://localhost:8180)
+
+Fazer o login com os seguintes dados:
+Email: admin@teste
+Senha: 12345678
