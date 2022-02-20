@@ -6,7 +6,7 @@ git clone https://github.com/Higor23/produtos.git
 cd produtos/
 ```
 
-Crie o Arquivo .env
+Criar o Arquivo .env
 ```sh
 
 cp .env.example .env
@@ -52,8 +52,12 @@ Gerar a key do projeto Laravel
 ```sh
 php artisan key:generate
 ```
+Acesse o PhpmyAdmin informando o mesmo usuário(root) e senha(root) utilizado no arquivo .env:
+[http://localhost:8180](http://localhost:8180)
 
-Criar e preencha as tabelas no banco de dados
+Criar um banco de dados com o mesmo nome(products) utilizado no arquivo .env.
+
+Criar e preencher as tabelas no banco de dados
 ```sh
 php artisan migrate --seed
 ```
