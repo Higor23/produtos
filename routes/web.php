@@ -22,7 +22,7 @@ Route::get('/', function () {
     
     // Products
     Route::get('product/create/', 'ProductController@create')->name('product.create');
-    Route::get('products', 'ProductController@index')->name('product.index')->middleware(['auth']);
+    Route::get('products', 'ProductController@index')->name('product.index');
     Route::post('product/store', 'ProductController@store')->name('product.store');
     Route::get('product/{id}/edit', 'ProductController@edit')->name('product.edit');
     Route::post('product/update/{id}', 'ProductController@update')->name('product.update');

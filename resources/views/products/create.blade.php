@@ -53,9 +53,6 @@
                 data: dataForm,
                 success: function(response) {
                     if (response) {
-                        // $("#form-create-product")[0].reset();
-                        // $('#create-product').modal('hide');
-
                         Swal.fire(
                                 'Produto cadastrado com sucesso!',
                                 'success'

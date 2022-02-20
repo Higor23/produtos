@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="mb-3">
-        <h3>Cadastrar Tag</h3>
+        <h3>Cadastra Tag</h3>
         <div class="btn-cad">
             <a class="btn btn-primary btn-back" href="{{ route('tag.index') }}">Voltar</a>
         </div>
@@ -16,7 +16,7 @@
                     <label>Nome</label>
                     <input type="text" class="form-control" name="name" placeholder="Digite o nome da tag">
                 </div>
-                
+
                 <div>
                     <button type="submit" id="btn-send-product" class="btn btn-success">Cadastrar</button>
                 </div>
@@ -37,20 +37,17 @@
                 success: function(response) {
                     if (response) {
                         Swal.fire(
-                                'Tag cadastrada com sucesso!',
-                                'success'
-                            )
-                            
+                            'Tag cadastrada com sucesso!',
+                        )
+
                     }
                 },
                 error: function(data) {
-                    $("#form-create-tag")[0].reset();
-                    $('#create-product').modal('hide');
                     Swal.fire({
                         icon: 'error',
                         title: 'Erro',
                         text: 'Não foi possível cadastrar a tag!',
-                    }),
+                    })
                 }
             });
         });
