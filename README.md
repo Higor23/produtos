@@ -1,19 +1,18 @@
 
 ### Passo a passo
-Clone o Repositório
+Clonar o Repositório
 ```sh
 git clone https://github.com/Higor23/produtos.git
-cd my-project/
+cd produtos/
 ```
 
 Crie o Arquivo .env
 ```sh
-cd example-project/
+
 cp .env.example .env
 ```
 
-
-Atualize as variáveis de ambiente do arquivo .env
+Atualizar as variáveis de ambiente do arquivo .env
 ```dosini
 APP_NAME=Produtos
 APP_URL=http://localhost:8180
@@ -34,7 +33,7 @@ REDIS_PASSWORD=null
 REDIS_PORT=6379
 ```
 
-Suba os containers do projeto
+Subir os containers do projeto
 ```sh
 docker-compose up -d
 ```
@@ -54,7 +53,7 @@ Gerar a key do projeto Laravel
 php artisan key:generate
 ```
 
-Criar as tabelas no banco de dados
+Criar e preencha as tabelas no banco de dados
 ```sh
 php artisan migrate --seed
 ```
