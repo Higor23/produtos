@@ -65,5 +65,7 @@ Acessar o projeto
 [http://localhost:8180](http://localhost:8180)
 
 Fazer o login com os seguintes dados:
+
 Email: admin@teste
+
 Senha: 12345678
